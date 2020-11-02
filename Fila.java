@@ -5,7 +5,7 @@
  *  se anotan la fecha, los ingresos y los gastos correspondientes a un
  *  apunte  contable  de una empresa
  * 
- * @author - 
+ * @author - Saúl Layos Iriso
  *  
  */
 public class Fila
@@ -19,18 +19,23 @@ public class Fila
      * Constructor  
      */
     public Fila(String id)    {
-         
-
+        this.id = id;
+        ingresos = 0;
+        gastos = 0;
+        fecha = new Fecha(1,1,2020);
     }
 
     /**
      * Constructor  
      */
     public Fila(String id, Fecha fecha, double ingresos, double gastos)    {
-        
+        this.id = id;
+        this.fecha = fecha;
+        this.ingresos = ingresos;
+        this.gastos = gastos;
 
     }
-    
+
     /**
      * accesor para el id de la fila
      */
@@ -38,7 +43,6 @@ public class Fila
         return this.id;
 
     }
-
 
     /**
      * accesor para la fecha
@@ -71,14 +75,14 @@ public class Fila
         return this.ingresos - this.gastos;
 
     }
-    
+
     /**
      * obtiene una copia idéntica a la fila actual.
      * La fecha que incluye la fila duplicada también es una copia
      * 
      */
     public Fila duplicar() {
-       return null;
+        return new Fila(this.id, this.fecha, this.ingresos, this.gastos);
 
     }
 
@@ -87,10 +91,15 @@ public class Fila
      * (leer enunciado)
      */
     public String toString() {
-      return null;
+       String cadena = "";
+       if (ingresos - gastos >= 0){
+           cadena = cadena.format("%8s%15s%15.2f€%15.2f€%15.2f€%n",id,fecha,ingresos,gastos,(ingresos-gastos));
+       }else if(ingresos - gastos < 0){
+           cadena = cadena.format("%8s%15s%15.2f€%15.2f€%15.2f€ **%n",id,fecha,ingresos,gastos,(ingresos-gastos));
+       }
+       return cadena;
 
     }
 
-     
 
 }
